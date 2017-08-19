@@ -4,31 +4,34 @@ $(function() {
 	  url: 'https://www.codeschool.com/users/Crocostyle.json',
 	  datatype: 'jsonp',
 	  success: function(response) {
-		  response.courses.completed.forEach(function(course) {
-			  var badges = document.getElementById("badges");
-			  var newBadge = document.createElement("div");
-			  newBadge.classList.add("course");
-			  
-			  var title = document.createElement("h3");
-			  title.text = course.title;
-			  newBadge.appendChild(title);
-			  
-			  var img = document.createElement("img");
-			  img.setAttribute("src", course.badge);
-			  newBadge.appendChild(img); 
-
-			  var a = document.createElement("a");
-			  a.setAttribute("href", course.url);
-			  a.setAttribute("target", "_blank");
-			  a.classList.add("btn");
-			  a.classList.add("btn-primary");
-			  a.text = "See Course";
-			  
-			  newBadge.appendChild(a); 
-
-			  badges.appendChild(newBadge);
-		  });
+		  addCourses(response.courses.completed);
 	  }
   });
+  
+  function.addCourses(courses){
+	  var badges = document.getElementById("badges");
+	  
+	  courses.forEach(function(course){
+		  
+		  var newBadge = $(document.createElement("div"), {
+			  "class" : "course"
+		  }).appendTo(badges);
+		  
+		  newBadge.append($(document.createElement("h3"), {
+			  text : course.title
+		  });
+		  
+		  newBadge.append($(document.createElement("img"), {
+			  src : course.badge
+		  });
+		  
+		  newBadge.append($(document.createElement("a"), {
+			  href : course.url,
+		  	  "target" : "_blank",
+		  	  "class" : "btn btn-primary",
+		  	  text : "See Course"
+		  });
+	  })
+  };
 
 });
