@@ -1,37 +1,36 @@
 $(function() {
 
-  $.ajax({
-	  url: 'https://www.codeschool.com/users/Crocostyle.json',
+  $.ajax({url: 'https://www.codeschool.com/users/Crocostyle.json',
 	  datatype: 'jsonp',
 	  success: function(response) {
 		  addCourses(response.courses.completed);
 	  }
   });
   
-  function.addCourses(courses){
-	  var badges = document.getElementById("badges");
+  function addCourses(courses){
+	  var $badges = $("#badges");
 	  
 	  courses.forEach(function(course){
 		  
-		  var newBadge = $(document.createElement("div"), {
+		  var $newBadge = $("<div />", {
 			  "class" : "course"
 		  }).appendTo(badges);
 		  
-		  newBadge.append($(document.createElement("h3"), {
+		  $newBadge.append($("<h3 />", {
 			  text : course.title
-		  });
+		  }));
 		  
-		  newBadge.append($(document.createElement("img"), {
+		  $newBadge.append($("<img />", {
 			  src : course.badge
-		  });
+		  }));
 		  
-		  newBadge.append($(document.createElement("a"), {
+		  $newBadge.append($("<a />", {
 			  href : course.url,
-		  	  "target" : "_blank",
+		  	  target : "_blank",
 		  	  "class" : "btn btn-primary",
 		  	  text : "See Course"
-		  });
+		  }));
 	  })
-  };
+  }
 
 });
